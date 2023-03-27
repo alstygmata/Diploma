@@ -6,9 +6,9 @@ sudo yum update -y
 
 sudo yum upgrade
 
-curl -LO https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz
+sudo yum install java-1.8.0-amazon-corretto
 
-sudo tar -xvzf amazon-corretto-11-x64-linux-jdk.tar.gz -C /usr/java/:wq
+sudo yum install java-1.8.0-amazon-corretto-devel
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 
