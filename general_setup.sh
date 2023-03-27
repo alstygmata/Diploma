@@ -37,6 +37,7 @@ echo "opening the firewall"
 
 sudo ufw enable
 sudo ufw allow 8080
+sudo ufw allow 22
 
 sudo apt-get update
 
