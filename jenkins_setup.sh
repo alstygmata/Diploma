@@ -1,40 +1,25 @@
 #!/bin/bash
 
-sudo apt update
+# Update the package list
+sudo apt-get update
 
-echo "installing Java JRE"
+# Install Java Development Kit (JDK)
+sudo apt-get install -y default-jdk
 
-sudo apt install -y default-jre
+# Add the Jenkins repository key
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 
-java -version
+# Add the Jenkins repository to the system
+echo "deb https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list
 
-echo "installing Java JDK"
+# Update the package list to include Jenkins
+sudo apt-get update
 
-sudo apt install -y default-jdk
+# Install Jenkins
+sudo apt-get install -y jenkins
 
-javac -version
+# Start the Jenkins service
+sudo systemctl start jenkins
 
-echo "add the repository key"
-
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key |sudo gpg --dearmor -o /usr/share/keyrings/jenkins.gpg
-
-
-echo "append the Debian package repository address"
-
-sudo sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-
-sudo apt update
-
-echo "installin Jenkins"
-
-sudo apt install -y jenkins
-
-echo "starting Jenkins"
-
-sudo systemctl start jenkins.service
-
-echo "opening the firewall"
-
-sudo ufw enable
-sudo ufw allow 8080
-
+# Enable the Jenkins service to start on system startup
+sudo systemctl enable jenkins
