@@ -20,7 +20,7 @@ resource "aws_instance" "ubuntu" {
   vpc_security_group_ids = [aws_security_group.diploma_sg.id]
   key_name      = "Frankfurt"
 
-  user_data = file("./general_setup.sh")
+  user_data = file("/home/cerberus/Diploma/Bash/general_setup.sh")
 
   tags = {
     Name = "ubuntu-instance"
@@ -33,7 +33,7 @@ resource "aws_instance" "a_linux" {
   vpc_security_group_ids = [aws_security_group.diploma_sg.id]
   key_name      = "Frankfurt"
 
-  user_data = file("./general_setup_amazon_linux.sh")
+  user_data = file("/home/cerberus/Diploma/Bash/general_setup_amazon_linux.sh")
 
   tags = {
     Name = "amazon-linux-instance"

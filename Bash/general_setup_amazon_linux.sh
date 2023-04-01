@@ -4,11 +4,11 @@ sudo su
 
 sudo yum update -y
 
-sudo yum upgrade
+sudo yum upgrage -y
 
-sudo yum install java-1.8.0-amazon-corretto
+sudo yum install java-1.8.0-amazon-corretto -y
 
-sudo yum install java-1.8.0-amazon-corretto-devel
+sudo yum install java-1.8.0-amazon-corretto-devel -y
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 
