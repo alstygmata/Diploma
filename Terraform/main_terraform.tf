@@ -20,6 +20,14 @@ resource "aws_instance" "ubuntu" {
   vpc_security_group_ids = [aws_security_group.diploma_sg.id]
   key_name      = "Frankfurt"
 
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_size = 10
+    tags = {
+      "name" = "root disk"
+    }
+  }
+
   user_data = file("/home/cerberus/Diploma/Bash/general_setup.sh")
 
   tags = {
@@ -33,12 +41,31 @@ resource "aws_instance" "a_linux" {
   vpc_security_group_ids = [aws_security_group.diploma_sg.id]
   key_name      = "Frankfurt"
 
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_size = 10
+    tags = {
+      "name" = "root disk"
+    }
+  }
+
   user_data = file("/home/cerberus/Diploma/Bash/general_setup_amazon_linux.sh")
 
   tags = {
     Name = "amazon-linux-instance"
   }
 }
+
+resource "aws_eip" "eip_manager" {
+  instance = aws_instance.EC2-Instance.id
+  vpc      = true
+}
+
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.EC2-Instance.id
+  allocation_id = aws_eip.eip_manager.id
+}
+
 
 
 resource "aws_security_group" "diploma_sg" {
